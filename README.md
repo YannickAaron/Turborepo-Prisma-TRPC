@@ -1,84 +1,226 @@
-# Turborepo starter
+# Full-Stack Monorepo Starter: tRPC, Next.js, Prisma & TanStack Query
 
-This Turborepo starter is maintained by the Turborepo core team.
+A sophisticated, production-ready monorepo built with Turborepo, combining multiple Next.js applications with shared packages. This starter template provides a solid foundation for building full-stack TypeScript applications with type-safety across the entire stack.
 
-## Using this example
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![tRPC](https://img.shields.io/badge/tRPC-%232596BE.svg?style=for-the-badge&logo=trpc&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
 
-Run the following command:
+## Features
 
-```sh
-npx create-turbo@latest
+- **Type-safe API**: End-to-end type safety with tRPC
+- **Modern stack**: Next.js 15+ with App Router
+- **Data management**: Efficient data fetching with TanStack Query
+- **Database access**: Prisma ORM with schema migrations
+- **Monorepo structure**: Optimized with Turborepo for efficient builds
+- **Shared packages**: Reusable UI components, configurations, and utilities
+- **Code generators**: Scaffolding tools for common patterns
+- **Developer experience**: Fast builds, strict typechecking, and linting
+
+
+## Repository Structure
+
+├── apps/                  # Application directory
+│   ├── backend/           # Backend application (express.js)
+│   ├── docs/              # Documentation site (Next.js)
+│   └── web/               # Main web application (Next.js)
+├── packages/              # Shared packages
+│   ├── db/                # Database package
+│   ├── eslint-config/     # Shared ESLint configuration
+│   ├── trpc/              # tRPC configuration
+│   ├── typescript-config/ # Shared TypeScript configuration
+│   └── ui/                # Shared UI components
+├── .gitignore
+├── .npmrc
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml    # PNPM workspace configuration
+├── README.md
+└── turbo.json             # Turborepo configuration
+
+
+## Getting Started
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en) (v18 or later)
+- [pnpm](https://pnpm.io/) (v8 or later)
+- PostgreSQL, MySQL, or SQLite database (depending on your preference)
+
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Olabayoji/Starter-Monorepo-Turborepo-.git
+cd your-repo-name
+# Install dependencies
+pnpm install
 ```
 
-## What's inside?
+### Configuration
 
-This Turborepo includes the following packages/apps:
+1. Set up your database connection in `.env` files:
 
-### Apps and Packages
+```bash
+# In packages/db/.env
+DATABASE_URL="postgresql://username:password@localhost:5432/mydb"
+# Or for MySQL
+# DATABASE_URL="mysql://username:password@localhost:3306/mydb"
+# Or for **SQLite**
+# DATABASE_URL="file:./dev.db"
+```
+2. Initialize your database:
+> **Important**: Ensure you have a running instance of your chosen database before proceeding with the configuration steps. For PostgreSQL or MySQL, make sure the database service is running on your machine or server.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+```bash
+# Generate Prisma client
+pnpm --filter @repo/db generate
 
-### Utilities
+# Push schema to database during development
+pnpm --filter @repo/db db:push
 
-This Turborepo has some additional tools already setup for you:
+# Or run migrations for production
+pnpm --filter @repo/db db:migrate
+```
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+
+### Development
+```bash
+# Run all applications in development mode
+pnpm dev (Alternatively, use turbo dev)
+
+# Run a specific application
+pnpm --filter docs dev
+pnpm --filter web dev
+pnpm --filter backend dev
+```
+### Development servers:
+- Web: http://localhost:3000
+- Docs: http://localhost:3001
+- Backend: http://localhost:4000
 
 ### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
+```bash
+# Build all applications and packages
 pnpm build
+
+# Build a specific application or package
+pnpm --filter web build
+pnpm --filter docs build
 ```
 
-### Develop
+### Lint
+```bash
+# Lint all applications and packages
+pnpm lint
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+# Lint a specific application or package
+pnpm --filter web lint
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Type Checking
+```bash
+# Type check all applications and packages
+pnpm check-types
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
+# Type check a specific application or package
+pnpm --filter web check-types
 ```
-npx turbo link
+
+## Working with the Monorepo
+### Adding a New Package Dependency
+```bash
+# Add a dependency to a specific package or app
+pnpm --filter <package-name> add <dependency-name>
+
+# Example: Add axios to the web app
+pnpm --filter web add axios
 ```
 
-## Useful Links
+### Using Shared Packages
+Shared packages are available as dependencies to all applications. For example, to use the UI package:
 
-Learn more about the power of Turborepo:
+```bash
+import { Button } from "@repo/ui";
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+export default function MyComponent() {
+  return <Button>Click me</Button>;
+}
+```
+
+### Using Generators
+This project includes several code generators to help you scaffold components and routes quickly.
+
+#### Generating Components
+##### Web Application Components
+Generate components in the web application:
+
+This creates a new component in apps/web/app/_components/ with:
+
+- **Component file** (ComponentName.tsx)
+- **Styles file** (ComponentName.module.scss)
+- **Test file** (ComponentName.spec.tsx)
+
+##### UI Library Components
+Generate shared components in the UI package:
+
+This creates a new component in components with:
+
+- **Component file**
+- **Styles file**
+- **Test file**
+- Automatically exports the component from the index file (optional)
+
+#### Generating Routes
+Create new routes in the web application with Next.js App Router structure:
+
+When running the command, you'll be prompted for:
+
+- **Route name**
+- **Target directory** (defaults to app)
+- Optional files to include:
+- **loading.tsx** (loading state)
+- **error.tsx** (error handling)
+- **layout.tsx** (layout wrapper)
+- **template.tsx** (template wrapper)
+- **not-found.tsx** (404 handling)
+
+The generator will create the appropriate files based on your selections, with:
+
+- **Main page file** (page.tsx)
+- **Styles file** (styles.module.scss)
+- **Test file** (test.spec.ts)
+- Any selected optional files
+
+Example Usage:
+```bash 
+# Generate a new route
+pnpm --filter web generate:route
+# > What is the name of the route? dashboard
+# > What is the target directory for the route? app
+# > Include loading.tsx? Yes
+# > Include error.tsx? Yes
+# > Include layout.tsx? No
+# > Include template.tsx? No
+# > Include not-found.tsx? No
+
+# Generate a new component
+pnpm --filter web generate:component
+# > What is the name of the component? UserProfile
+```
+
+This would generate:
+
+- A dashboard route with page, loading, error files
+- A UserProfile component with all associated files
+
+## Learn More
+[Turborepo Documentation](https://turbo.build/)
+[Next.js Documentation](https://nextjs.org/)
+[tRPC Documentation](https://trpc.io/docs)
+[Prisma Documentation](https://www.prisma.io/)
+[TanStack Query Documentation](https://tanstack.com/query/latest)
+[pnpm Workspaces](https://pnpm.io/workspaces)
