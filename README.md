@@ -79,13 +79,20 @@ DATABASE_URL="postgresql://username:password@localhost:5432/mydb"
 
 ```bash
 # Generate Prisma client
-pnpm --filter @repo/db generate
+pnpm --filter @repo/db db:generate
 
 # Push schema to database during development
 pnpm --filter @repo/db db:push
 
 # Or run migrations for production
 pnpm --filter @repo/db db:migrate
+```
+
+#### Database Exploration with Prisma Studio
+To explore and manipulate your database, you can use Prisma Studio:
+
+```bash
+pnpm --filter @repo/db studio
 ```
 
 

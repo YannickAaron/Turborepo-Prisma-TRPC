@@ -23,7 +23,6 @@
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sass": "^1.85.1",
     "superjson": "^2.2.2",
     "ui": "^0.2.4",
     "zod": "^3.24.2"
@@ -36,6 +35,8 @@
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "eslint": "^9.20.0",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "sass": "^1.85.1"
+
   }
 }
