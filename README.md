@@ -21,6 +21,7 @@ A sophisticated, production-ready monorepo built with Turborepo, combining multi
 
 
 ## Repository Structure
+```bash
 
 ├── apps/                  # Application directory
 │   ├── backend/           # Backend application (express.js)
@@ -39,6 +40,7 @@ A sophisticated, production-ready monorepo built with Turborepo, combining multi
 ├── pnpm-workspace.yaml    # PNPM workspace configuration
 ├── README.md
 └── turbo.json             # Turborepo configuration
+```
 
 
 ## Getting Started
