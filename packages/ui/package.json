@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-     "./styles": "./src/styles/index.ts",
-      "./components": "./src/components/index.ts"
+    "./styles": "./src/styles/index.ts",
+    "./components": "./src/components/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -19,6 +19,7 @@
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "eslint": "^9.20.0",
+    "sass": "^1.85.1",
     "typescript": "5.7.3"
   },
   "dependencies": {
