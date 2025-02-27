@@ -88,6 +88,13 @@ pnpm --filter @repo/db db:push
 pnpm --filter @repo/db db:migrate
 ```
 
+#### Database Exploration with Prisma Studio
+To explore and manipulate your database, you can use Prisma Studio:
+
+```bash
+pnpm --filter @repo/db studio
+```
+
 
 ### Development
 ```bash
