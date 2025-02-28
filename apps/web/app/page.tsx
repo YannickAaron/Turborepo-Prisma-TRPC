@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import { trpc } from "./utils/trpc";
 
 export default function Home() {
-  const { data, isLoading, error } = trpc.hello.sayHello.useQuery();
+  const { data, isLoading, error } = trpc.user.getAllUsers.useQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
