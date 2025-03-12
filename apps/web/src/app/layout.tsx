@@ -1,3 +1,6 @@
+import { TrpcClientProvider } from "~/components/core/trpc-provider";
+import { LocalizationProvider } from "~/components/core/localization-provider";
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +8,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <TrpcClientProvider>
+        <LocalizationProvider>
+          <body>{children}</body>
+        </LocalizationProvider>
+      </TrpcClientProvider>
     </html>
   );
 }
