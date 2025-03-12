@@ -13,19 +13,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum BloodType {
+  A_POSITIVE
+  A_NEGATIVE
+  B_POSITIVE
+  B_NEGATIVE
+  AB_POSITIVE
+  AB_NEGATIVE
+  O_POSITIVE
+  O_NEGATIVE
+}
+
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
- 
+  id                  String       @id @default(cuid())
+  name                String
+  image               String?
+  birthDate           DateTime?
+  sex                 String?
+  height              Float?
+  weight              Float?
+  bloodGroup          BloodType?
+  allergies           String[]
+  intolerances        String[]
+  inmunizationHistory String[]
+  insuranceinfo       String?
+  familyHistory       String?
+  lifestyle           String?
+  emergencyContact    String?
+  email               String       @unique
+  emailVerified       DateTime?
+  accounts            Account[]
+  sessions            Session[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
 model Account {
   userId            String
   type              String
